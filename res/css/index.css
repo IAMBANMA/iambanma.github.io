@@ -86,12 +86,13 @@ aside {
     height: 100%;
     overflow: auto;
     border-right: 1px solid #ddd;
-    font-size: 14px;
     background: #f6f6f6;
 }
 
 nav {
     margin: 1px 0;
+    font-size: 14px;
+
 }
 
 dl {
