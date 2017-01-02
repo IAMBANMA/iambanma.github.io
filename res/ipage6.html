@@ -1,0 +1,13 @@
+<link rel="stylesheet" href="css/index.css">
+
+            <h2>relative相对定位</h2>
+            <p>•••relative和absolute的相煎关系 relative对absolute的限制作用:1,限制left/top/right/bottom定位;2,限制z-index层级;3,限制在overflow下的嚣张气焰; 解释下第二点的限制z-index层级:当absolute元素的父级设置了relative,并且设置了z-index为数值,非auto时,absolute元素的z-index将失效,它的层级由限制它的父级元素的z-index决定. relative对fixed的限制作用:只有一条,就是z-index的层级. 总结:以上是讲relative具有限制同源属性的功能.relative/absolute/fixed具有同源性,都是position的属性嘛!
+                <br>
+                <br> •••relative和定位 relative的定位有两个特点:1,相对自身;2,无侵入; 解释:相对自身是讲:relative元素使用top/right/left/bottom属性定位时,relative元素是相对于自身原来的位置来移动的.(这点和absolute元素使用这些属性定位不同,absolute是向上寻找限制他的父元素,以确定基准点) 无侵入讲的是:relative元素的位置变化不会影响到页面其他元素的布局,因为,虽然他移动了,但是他原来的位置还是存在的,所以不会影响其他元素的布局
+                <br>
+                <br> •relative下定位属性对立出现时会怎样? 之前我已近领教了absolute下定位属性对立设置的特点,就是拉伸. 但是relative下则是斗争,你是我活.具体就是:当同时设置了left和right时,left起作用,right失效;当同时设置了top和bottom的时候,top起作用,bottom失效.
+                <br>
+                <br> •••relative和z-index层级 1,提高层叠上下文(而且是鬼畜级别的!相当厉害) 2,新建层叠上下文与层级控制:relative元素的z-index属性值是具体的数值时,会新建层叠上下文,如果这时候他的内部还有absolute的子元素,那么子元素的z-index会失效,子元素会继承父元素的层级. 但是,当z-index是auto时,则不再具有限制层级的能力. (注释:IE6/7下,即使relative的z-index属性值是auto,还是会新建层叠上下文,限制内部子元素层级,因此IE6/7下,非常容易出现层级覆盖的bug)
+                <br>
+                <br> •••relative的最小化影响原则---本节老师干货分享 所谓relative的最小化影响原则,指的是尽量降低relative属性对其他元素后布局的潜在影响! 原则1,尽量避免使用relative; 原则2,relative最小化; 总结:主要讲的是absolute不要依赖relative.使用过多会带来比较麻烦的层叠问题.relative最小化是指,如果必须使用relative的时候,单独创建一个新的空容器,将需要的元素包含进来.这样就实现了最小化.而且兼容性ok,可以放心使用.</p>
+       

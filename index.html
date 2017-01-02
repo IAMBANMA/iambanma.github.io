@@ -4,308 +4,100 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="format-detection" content="telephone=yes" />
-    <title>小马格 长征路上 首页</title>
-    <link rel="stylesheet" href="stylesheets/index.css">
-    <style>
-
-    </style>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>ipage</title>
+    <link rel='shortcut icon' href='ip.ico' type='image/x-icon'>
+    <link rel="stylesheet" href="res/css/index.css">
 </head>
 
 <body>
     <header>
-        <h1>小马哥的长征路上</h1>
-        <h3>前端之路</h3></header>
-    <div class="content">
-        <div class="data">
-            <h3>AJAX基础知识点</h3>
-            <p class="txtp" style="height:20px;white-space:nowrap;">总结一下JavaScript的ajax. 定义:AJAX=asynchronous javascript and XML(异步的javascript和XML) AJAX不是新的编程语言,而是一种使用现有标准的新方法.实现:在不重新加载整个页面的情况下,与服务器交换数据并更新局部网页.
-                <br>
-                <br>••工作原理:浏览器[1,发生某个事件...2,常见XMLHttpRequest对象;3,发送HttpRequest]-->internet-->服务器[1,处理HttpRequest;2,创建响应并将数据返回浏览器]-->Internet-->浏览器[1,使用js处理被返回的数据;2,更新页面内容]
-                <br>
-                <br>••创建XMLHttpRequest对象 兼容现代浏览器及老式IE的做法是: var xmlhttp; if(window.XMLHttpRequest) { xmlhttp=new XMLHttpRequest(); //支持现代浏览器 }else{ xmlhttp=new ActiveXObject("Microsoft.XMLHTTP"); //支持IE5/6 }
-                <br>
-                <br>••发送请求 我们需要用到XMLHttpRequest对象的open()和send()方法: 用法:xmlhttp.open(method,url,async);解释:method是指请求类型GET或POST;url:文件在服务器上的位置;async:true(异步)或false(同步) xmlhttp.send(string);解释:string:仅用于POST请求. **使用GET请求的注意点:1,为了避免得到的是缓存结果,需要向URL添加一个唯一的ID,比如:xmlhttp.open("GET",".....?="+Math.random(),true) 2;可以通过向URL添加信息发送出去;比如xmlhttp.open("GET","....?q=lala&Q=haha",true) **使用POST方法的注意点:1,如果想POST数据,需要使用setRequestHeader()来添加HTTP头,然后在send()方法中添加希望发送的数据.(setRequestHeader(header,value)的使用:header:规定头名称,如Content-type;value:规定头值,比如:application/x-www-form-urlencoded);怎样在send()中添加数据?比如xmlhttp.send("fname=majun&lname=manni");
-                <br>
-                <br>••async取值不同的区别 **async是true时;异步AJAX请求,可以在等待服务器响应的时候执行其他脚本,当响应就绪后再对响应进行处理,处理函数是onreadystatechange事件. 例如:xmlhttp.onreadystatechange=function{ if(xmlhttp.readyState==4&&xmlhttp.status==200) {document.getElementById("mydiv").innerHTML=xmlhttp.responseText; } } xmlhttp.open(.....); xmlhttp.send(); **一般不推荐使用false,当使用false时,就不需要编写onreadystatechange事件函数,只需要将处理代码写在send()语句后即可; 例如:xmlhttp.open(.....);xmlhttp.send();document.getElementById("mydiv").innerHTML=xmlhttp.responseText;
-                <br>
-                <br>••如需获得来时服务器的响应,请使用XMLHttpRequest对象的responseText或responseXML属性.
-                <br>
-                <br>••AJAX的onreadystatechange事件; readystate属性:储存着XMLHttpRequest的状态,它的值有5个,是从0到4;0:代表请求未初始化;1:代表服务器连接已将建立;2:代表请求已经接受;3:代表请求处理中;4:代表处理完成,且响应已经就绪. status属性:取值200 ok;取值404,未找到页面 onreadystatechange事件会基于readystate值的改变触发,所以在readystate从0到4变化时,onreadystatechange事件被触发了5次.
-                <br>
-                <br>••当页面有多个XHR的时候,代码量会增大,需要适当优化,相同的代码重复使用,考虑使用带参数的回调函数方法解决.
-            </p>
-            <a href="javascript:;" class="seemore">查看全部</a>
+        <!-- 手机端使用下面的span -->
+        <a id='logo' href="index.html"></a>
+        <span id='hnav'>列表</span>
+        <span id='logotext'><a href="index.html">Ipage</a></span>
+        <div id="navi">
+            <a href="javascript:;" id="uper"><i id='leftarr'></i></a>
+            <a href="javascript:;" id="downer"><i id='rightarr'></i></a>
         </div>
-        <div class="data">
-            <h3>JS在不同浏览器中的差异</h3>
-            <p class="txtp" style="height:20px;white-space:nowrap;">••window.event对象 ff,chrome没有window.event对象,只有event对象.IE里只支持window.event对象,其他主流浏览器两者都支持> 所以兼容代码是: function handle(e){e=e||event;}
-                <br>
-                <br>••获取HTML元素 IE支持el.name,el.getAttribute(name); ff,chrome基本属性支持el.name,其余属性仅支持el.getAttribute(name)
-                <br>
-                <br>••自定义属性问题 IE下,可以使用获取常规属性的方法获取自定义属性,也可以使用getAttribute()获取自定义属性;ff下,只能使用getAttribute()获取自定义属性
-                <br>
-                <br>••ajax请求 IE:new ActiveXObject() ff,chrome:new XMLHttpRequest()
-                <br>
-                <br>••innerText的使用 ff不支持innerText,他支持textContent来实现innerText,不过textContent没有像innerText一样考虑display方式,所以不完全兼容IE. 如果不用textContent,字符串里面不包含HTML代码也可以考虑使用innerHTML代替
-                <br>
-                <br>••获取鼠标指针的位置 IE下: var myCursorPosition=[0,0]; myCursorPosition[0]=event.clientX; myCursorPosition[1]=event.clientY; ff下: var myCursorPosition=[0,0]; myCursorPosition[0]=event.pageX; myCursorPosition[1]=event.pageY;
-                <br>
-                <br>••获取可见区域,窗口的大小 IE下: var browsersize=[0,0]; browsersize[0]=document.documentElement.clientWidth; borwsersize[1]=document.documentElement.clientHeight; ff下: var browsersize=[0,0]; browsersize[0]=window.innerWidth; browsersize[1]=window.innerHeight;
-                <br>
-                <br>••Alpha透明 解释:这并不是js句法问题,而是源自于css的Alpha透明. IE下: css:{filter:alpha(opacith=50);} js:var obj=document.getElementById(); obj.style.filter="alpha(opacity=80)"; ff下: css:{opacity:0.5;} js:var obj=document.getElementById(); obj.style.opacity="0.8";
-                <br>
-                <br>••css float 值 正常情况下,访问一个给定css值的基本句法是:object.style.property; 但是,float在js中是保留字,因此不能直接使用object.style.float来访问.怎样做呢?以下: IE下: document.getElementById("haha").style.styleFloat="left"; ff下: document.getElementById("haha").style.cssFloat="left";
-                <br>
-                <br>••js访问外部样式表的css IE下: var obj=document.getElementById("haha"); var style=obj.currentStyle.backgroundColor; FF下: var obj=document.getElementById("haha"); var myComputedStyle=document.defaultView.getComputedStyle(obj,null); var style=myComputedStyle.backgroundColor;
-                <br>
-                <br>••访问元素的"class" class在js中是一个保留字,所以在两个浏览器中我们通过如下方式访问: IE下: var obj=document.getElementById("haha"); var myclass=obj.getAttribute("className"); FF下: var obj=document.getElementById("haha"); var myclass=obj.getAttribute("class");
-            </p>
-            <a href="javascript:;" class="seemore">查看全部</a>
-        </div>
-        <div class="data">
-            <h3>absolute绝对定位</h3>
-            <p class="txtp" style="height:20px;white-space:nowrap;">
-                •绝对定位于浮动鲜为人知的兄弟关系: 相同的特性表现:包裹性和破坏性. 有的时候,它们两个可以相互替换,而效果相同. 不要总和position:relative绑在一起,position:absolute越独立越强大!
-                <br>
-                <br>•独立的absolute可以摆脱overflow的限制,无论是滚动还是隐藏.
-                <br>
-                <br>•无依赖的绝对定位 无依赖是指:不受relative限制的absolute定位,行为表现上不使用top/right/bottom/left任何一个属性或使用auto为值得! 很强大! 定位的行为表现:1,脱离文档流2,折翼的天使
-                <br>
-                <br>•折翼天使的特性表现:1,去浮动(绝对定位与float兄弟关系不能同时使用,因为同时使用时只有一个起作用,所以绝对定位可以去浮动)2,位置跟随.(配合margin精确定位,支持负值定位,可兼容IE6,超赞的!!) 注释:IE7下任何元素绝对定位后会inline-block化,即使元素原本是block也会inline-block化.(解决办法:在绝对定位元素的外面嵌套div父元素)
-                <br>
-                <br> •无依赖的absolute相对定位实例篇 1,图片图标来覆盖,无依赖,真不赖(html标签的位置顺序很重要) 2,如何定位下拉框,最佳实践来分享 3,对齐居中或边缘,定位实现有脸面 4,星号时有时没有,破坏队形不用愁 5,图文对齐兼容差,绝对定位来开挂 6,文字溢出不够放,不值一提就小样!
-                <br>
-                <br> tips:动画应该作用在绝对定位元素上
-                <br>
-                <br> 多个绝对定位元素在垂直方向上的位置,遵循后来居上原则.
-                <br>
-                <br> z-index无依赖 1,如果只有一个绝对定位元素,自然不需要z-index,自动覆盖在普通元素上 2,如果两个绝对定位元素,控制DOM流的前后顺序达到需要的覆盖效果,依然无需z-index 3,如果多个绝对定位交错,非常非常少见,z-index:1控制 4,如果非弹框类的绝对定位元素z-index>2,必定z-index冗余,请优化!
-                <br>
-                <br> •主动定位技能 top /left/right/bottom 一般情况下,两两组合使用top,left/top,right/left,bottom/right,bottom
-                <br>
-                <br> •left/top/right/bottom与width/height 异曲同工与特殊表现 举个栗子: html,body{ height:100%; }
-                <br>
-                <br> 现在实现一个全屏自适应黑色半透明的遮罩层 通常实现四 .overlay{ position:absolute; width:100%; height:100%; left:0;top:0; . . }
-                <br>
-                <br> 可能有些人不知道,还可以这样实现: .overlay{ position:absolute; left:0;right:0;top:0;bottom:0; . . . } 没有宽度,没有高度,依然可以实现满屏的效果.
-                <br>
-                <br> tips:绝对定位方向是对立(如:left vs right,top vs bottom)的时候,结果不是瞬间位移,而是身体的爆裂拉伸. 也就是说,很多情况下,absolute的主动技能设置和width/height是可以相互替代的. position:absolute;left:0;top:0;width:50%; 等同于: position:absolute;left:0;top:0;right:50%; 注意:这种特性需要IE7+支持. 那么,这两种方法的差别在哪里呢?absolute拉伸更强大: 比如:实现一个距离右侧200px的全屏自适应的容器层,怎样实现? 使用拉伸:position:absolute;left:0,right:200px; ok 兼容IE7+ 但是,width只能使用css3 calc计算: position:absolute;left:0;width:calc(100%-200px);而且这种实现,只兼容现代浏览器. 其次,相互支持性: 1,容器无需固定width/height值,内部元素亦可以拉伸 2,容器拉伸,内部元素支持百分比width/height值 最后,相互合作性 如果拉伸和width/height尺寸同时存在,会怎样? width/height设置的尺寸 优先于left/top/right/bottom拉伸的尺寸. 栗子:position:absolute;top:0;left:0;right:0;width:50%;的实际宽度是50%而不是拉伸的100%. 怎样体现合作性?margin:auto;当尺寸限制,拉伸以及margin:auto同时出现的时候,就会有绝对定位元素的绝对居中效果!(注:支持IE8+)
-                <br>
-                <br> •absolute网页整体布局,适合移动web的布局策略 absolute与整体布局 1,body降级,子元素升级(也就是让子元素替代body作为页面的整体容器:position:absolute;left:0;right:0;top:0;bottom:0;并且body{ height:100%;} 2,各模块头尾,侧边栏(pc端)各居其位 完整例子看demo,absolute整体布局
-            </p>
-            <a href="javascript:;" class="seemore">查看全部</a>
-        </div>
-        <div class="data">
-            <h3>float浮动知识点总结</h3>
-            <p class="txtp" style="height:20px;white-space:nowrap;">•float的包裹与破坏 包裹:1收缩 2坚挺 3 隔绝(也就是BFC的效果)
-                <br>
-                <br> 注释:具有包裹性的其他小伙伴 display:inline-block/table-cell/.... position:absolute(float近亲)/fixed/sticky overflow:hidden/scroll
-                <br>
-                <br> 破坏:父容器的高度塌陷 注释:其他具有破坏性的小伙伴 display:none position:absolute/fixed/sticky
-                <br>
-                <br> 浮动是魔鬼,更是情非得已(特性使然)
-                <br>
-                <br> •清除浮动带来的影响 1,元素底部插入具有clear:both声明的元素 2,让父元素BFC或者haslayout(IE6,7私有的方法)
-                <br>
-                <br> clear通常应用形式 1,html层面,在塌陷父容器的底部插入具有clear:both声明的元素 2,css层面,使用after在父元素底部生成一个具有clear:both声明的伪元素 以上两种方法的不足 html方式需要添加一个空元素 css方式IE6/7不兼容
-                <br>
-                <br> BFC/haslayout通常声明 float:left/right position:absolute/fixed overflow:hidden/scroll(IE7+) display:inline-block/table-cell(IE8+) width/height/zoom:1(IE下的神器)/...(IE6/7) 以上也有不足,一是不能"一方通行",二是兼容性问题
-                <br>
-                <br> 权衡后的策略 .clearfix:after{content:'';display:block;height:0;overflow:hidden;clear:both;}(IE8+) .clearfix{*zoom:1;}(IE6/7)
-                <br>
-                <br> 更好的方法 .clearfix:after{content:'';display:table;clear:both;} .clearfix{*zoom:1;} 优势很明显,写的很少,功能也实现了,而且兼容也很好 .clearfix应用在包含浮动子元素的父级元素上,不要滥用.
-                <br>
-                <br> 注释:浮动也会触发haslayout,所以,浮动在IE67下更显魔性! float能使元素block化,还能使元素紧密排列(去空格化)
-                <br>
-                <br> 浮动与流体布局: 让IE7飙泪的浮动问题 1,含clear的浮动元素包裹不正确的问题 2,浮动元素倒数2个莫名垂直间距问题 3,浮动元素最后一个字符重复问题 4,浮动元素楼梯排列问题 5,浮动元素和文本不在同一行的问题
-            </p>
-            <a href="javascript:;" class="seemore">查看全部</a>
-        </div>
-        <div class="data">
-            <h3>line-height属性详解</h3>
-            <p class="txtp" style="height:20px;white-space:nowrap;">
-                •••line-height与行内框盒子模型---css进阶必备知识 所有内联元素的样式表现都与行内框盒子模型有关! 行框盒子模型 1,内容区域(可以理解为用鼠标选中文字时的神色块区域) 2,内联盒子() 3,行框盒子(包含一行文字,可以由多个内联盒子组成) 4,包含盒子(由多个行框盒子组成)block块.
-                <br>
-                <br> •••line-height的高度机制原理---深入理解内联元素的高度表现 **内联元素的高度是由line-height决定的,而不是文字撑开的(张老师举了一个例子,两个内联元素,一个行高是0,font-size给一个数值,另一个行高给定一定的数值,font-size为0,结果:有行高的元素有高度,行高为0的元素高度也为0) 需要知道两点:1,行高由于其继承性,影响无处不在,即使单行文本也不例外; 2,行高只是幕后黑手,[高度的表现不是行高,而是内容区域和行间距].只是正好等于行高.(内容区域高度只与字号和字体有关,和行高没有任何关系;在宋体下,内容区域高度等于文字大小) 行高=内容区域高度+行间距 总结:行高决定 了内联盒子的高度,行间距是抢头筹,可大可小(甚至是负值),保证高度正好等于行高. 多行文本的高度等于单行文本高度的累加(如p元素)
-                <br>
-                <br> •••line-height各类属性值---深入理解line-height不同类别值得不同表现 行高支持以下5中类别的属性值 1,normal;默认属性值,跟着用户的浏览器走的,且与元素字体相关联的.(因为其不确定性,我们在开发的时候,会提前重置) 2,数字类型(根据当前元素的font-size大小计算)比如,line-height:2;font-size:18px,则行高是2*20=40px 3,length类型;长度单位,有相对单位如em/rem,绝对单位:px等. 4,百分比;也是相对于元素字体大小计算的;比如line-height:150%;font-size:20px;则行高是150%*20px=30px. 5,inherit(继承)兼容IE8+;(input框等元素默认行高是normal,设置inherit可以让文本框样式可控性更强. **body全局数值行高使用经验 这里,匹配20px的使用经验--方便心算line-height=20px/14px=1.4286 body{font-size:14px;line-height:1.4286;}
-                <br>
-                <br> •••行高与图片的表现--深入探讨行高和图片的样式表现 思考这个问题:行高会不会影响图片实际占据的高度?答案是不会 略
-                <br>
-                <br> •••line-height的实际应用 1,大小不固定的图片,多行文字的垂直居中 示例.box{line-height:300px;text-align:center;} .box > img{vertical-alight:middle;} 以上兼容IE8+. 多行文本水平垂直居中 .box{line-height:250px;text-align:center;} .box > .text{display:inline-block;line-height:normal;text-align:left;vertical-align:middle;} 以上也是支持IE8+;其实类似于图片水平垂直居中,因为是文字所以要加点处理,让文本像图片一样inline-block化,重置line-height. 2,代替height,避免IE6/7下的haslayout.
-                <br>
-                <br> •••常见这样的设置,{height:36px;line-height:36px},本意是为了单行文字的垂直居中,其实这里的height:36px是多余的.完全可以省去. 详细见demo 单行文本垂直居中需要height吗.html
-            </p>
-            <a href="javascript:;" class="seemore">查看全部</a>
-        </div>
-        <div class="data">
-            <h3>overflow属性详解</h3>
-            <p class="txtp" style="height:20px;white-space:nowrap;">•••overflow基本属性:基本表现,包括兼容性 基本属性值visible(默认)/hidden/scroll/auto/inherit(不常用,各种兼容的问题) 属性表现见示例:overflow基本属性表现 css3的overflow-x和overflow-y(IE8+) 注:如果overflow-x和overflow-y的值不同,且其中一个赋值visible,另一个赋值为hidden/auto/scroll,那么,被赋值为visible的将自动重置为auto.一定要注意哦!
-                <br>
-                <br> •兼容性 1,滚动条样式,各家浏览器不一样 2,宽度设定机制:示例 &lt;div class="box"&gt;&lt;div class="content"&gt;&lt;/div&gt;&lt;/div&gt; .box{width:400px;height:100px;overflow:auto;} .content{width:100%;height:200px;} 示例解释,以上html是两个div,一个是容器,一个是内容子元素.css设置容器的高度为100px,overflow:auto;子元素的高度为200px,表现应该是只出现垂直的滚动条,但是实际情况是,IE7下水平滚动条也出现了.为什么?因为宽度的设定机制,IE7下子元素的width:100%将父容器的400px当做宽度,垂直滚动条的出现使得宽度不足400px,因此出现了水平滚动条.(IE8+表现ok,没有此兼容问题)怎样解决呢?很简单,删除width:100%就ok了>
-                <br>
-                <br> •overflow起作用的前提是: 1,非display:inline水平 2,对应方位的尺寸限制.width/height/max-width/max-height/absolute拉伸 3,对于单元格td等,还需要table为table-layout:fixed状态才行
-                <br>
-                <br> •分享劲爆小技巧 overflow:visible妙用 IE7浏览器下,按钮中的文字越多,按钮两侧padding留白也越大.其他浏览器表现正常.怎样解决呢? 给按钮添加overflow:visible,ok.
-                <br>
-                <br> •••overflow与滚动条---滚或不滚,我就在那里 tips:无论什么浏览器,默认滚动条均来自于&lt;html&gt;!而不是&lt;body&gt;. IE7浏览器,默认总是有一个垂直滚动条 IE8+浏览器,默认则是overflow:auto状态,内容不足一屏时,没有滚动条,多于一屏才出现. 所以**如果我们想去除页面默认滚动条,只需要 html{overflow:hidden;}即可.而不需要html,body{overflow:hidden;}body多余,躺枪!!!!!
-                <br>
-                <br> •js与滚动条 chrome浏览器:document.body.scrollTop; 其他浏览器是:document.documentElement.scrollTop; 所以,获取滚动高度时应使用兼容模式: var st=document.body.scrollTop ||document.documentElement.scrollTop;
-                <br>
-                <br> •tips overflow的padding-bottom缺失现象: .box{width:400px;height:100px;padding:100px 0;overflow:auto;}解释:例子中设置了padding:100px 0;所以正常来说内容的上下会有100px的padding,实际情况是,chrome浏览器正常表现,其他所有的浏览器都缺失了padding-bottom.(这样导致了:不一样的scrollheight(元素内容高度)见overflow缺失paddingbottom示例.)((注释:马俊自己试了一下,这个知识点现在各浏览器表现一致))
-                <br>
-                <br> •滚动条的宽度机制 一句话:滚动条会占据容器的可用宽度 怎样计算滚动条的尺寸呢? .box{widht:400px;overflow:scroll;} .in{*zoom:1;/* for IE7 */} &lt;div class="box"&gt; &lt;div id="in" class="in"&gt;&lt;/div&gt; &lt;/div&gt; console.log(400-document.getElementById("in").clientWidth); 详细示例见demo 计算滚动条的宽度.html
-                <br>
-                <br> •overflow:auto的潜在布局隐患 滚动条会占据容器尺寸,原本和谐的布局,滚动条出现后可能会挂掉! 解决办法:使用自适应布局或者预留滚动条的宽度.
-                <br>
-                <br> •水平居中跳动问题 绝大多数的浏览器是水平居中对齐的,当滚动条出现时,就会出现水平居中跳动问题.(.container{width:100%;margin:0 auto;}) 怎样修复呢?1,给页面默认设定滚动栏html{overflow-y:scroll;}(IE6/7/8下使用) 2,.container{padding-left:calc(100vw-100%);}(兼容IE9+) 解释:添加padding-left修复,100vw是浏览器的宽度,100%是可用内容的宽度,相减就是滚动栏的宽度. 详细示例见demo,水平居中跳动修复.html(IE9+但是马俊自己试了一下,没有什么明显的效果,不过对css单位有了有了了解,vw是相对视窗的宽度的单位,1vw是视窗宽度的百分之一,依次类推)
-                <br>
-                <br> •自定义滚动条 webkit: 整体部分::-webkit-scrollbar 两端按钮::-webkit-scrollbar-button 外层轨道::-webkit-scrollbar-track 内层轨道::-webkit-scrollbar-track-piece 滚动滑块::-webkit-scrollbar-thumb 边角::-webkit-scrollbar-Corner 还有,hover态,水平态,垂直态等 实际开发中常用的就是下面三个 ::-webkit-scrollbar{width:8px;height:8px;}/*血槽宽度*/ ::-webkit-scrollbar-thumb{background-color:rgba(0,0,0,.3);border-radius:6px;}/*拖动条*/ ::-webkit-scrollbar-track{background-color:#ddd;border-radius:6px;}/*背景槽*/
-                <br>
-                <br> •IE自定义滚动条(这里不展开讲了,因为IE自定义滚动条实在是丑到恶心,建议放弃)
-                <br>
-                <br>•滚动条自定义插件 jquery滚动条自定义插件: 项目页面:http://manos.malihu.gr/jquery-custom-content-scroller/ github地址:http://github.com/malihu/malihu-custom-scrollbar-plugin 兼容性IE8+
-                <br>
-                <br> •分享移动端滚动技能 在iOS下原生滚动回弹效果,可以通过-webkit-overflow-scrolling:touch;让滚动具有原生效果般的回弹效果.
-                <br>
-                <br> ••overflow与BFC--清除浮动,自适应布局等 BFC:块级格式化上下文:解释:页面之结界,内部元素再怎样翻云覆雨都不会影响外部. overflow可以触发BFC,但是不是所有的overflow属性都可以,只有overflow:hidden/auto/scroll可以.(应用1,清除浮动影响;2,避免margin穿透问题;3,两栏自适应布局) 1.详细效果看demo overflow清除浮动影响.html(内部浮动无影响,支持IE7+,.clearfix{overflow:hidden;_zoom:1;}注释:此设置无法广泛应用,适合局部,记得float部分清除浮动的最优样式是.clearfix{*zoom:1;}.clearfix{content:'';display:table;clear:both;} 2.避免margin穿透demo;(我自己试了下,没有老师讲的bug,所以也没有实现)注释:避免margin穿透的其他方法:设置边框,padding,或者margin自身元素BFC化. 3.这个就内容就有点多啦!详细demo见overflow与两栏自适应布局.html (注释:注意流体自适应布局与BFC自适应布局的差异,不可以混杂在一起,如果使用了流体自适应布局时,不小心触发了BFC,可能会出现不想要的效果.)
-                <br>
-                <br> •触发BFC的各种属性有哪些?哪些又适合两栏自适应布局呢? 1,overflow:hidden;自适应,但是"溢出不可见"限制应用场景 2,float+float 包裹性+破坏性,无法自适应,适合块状浮动布局 3,position:absolute脱离文档流,自娱自乐,不适合 4,display:inline-block;包裹性,无法自适应,IE6/7block水平不识别inline-block 5,display:table-cell,包裹性,天生无溢出特性,绝对宽度也能自适应 两栏自适应布局方案 .cell{ display:table-cell;width:2000px;//IE8+ BFC特性 *display:inline-block;*width:auto; //IE7- 伪BFC特性(只适用于IE6/7的block元素) } 以上方案,功能强大,兼容性强,推荐!
-                <br>
-                <br> ••overflow与绝对定位--隐藏失效与滚动固定 隐藏失效:文档定义:绝对定位元素不总是被父级overflow属性剪裁,尤其当overflow在绝对定位元素及其包含块之间的时候.(包含块:指含有position:absolute/relative/fixed声明的父辈元素,如果没有则是body元素) 示例场景1描述:一个容器内有一张大于容器尺寸的图片,当容器设置overflow:hidden的时候,图片会被剪裁,这时候给图片添加属性position:absolute,那么剪裁失效了. 怎样解决这样的问题呢? 根据以上定义,找解决方案.定义指出,当overflow的元素在绝对定位元素及绝对定位元素包含块(含有position属性的父级才是包含块,)之间时,剪裁才失效,我们可以让overflow元素自身成为包含块,或者overflow的子元素成为包含块就可以了. 详细demo见 overflow与隐藏失效.html
-                <br>
-                <br> ••依赖overflow的样式表现----大腿抱起来 1,resize拉伸 css3有个属性名resize,可以拉伸元素尺寸: resize:both水平垂直两个方向拉伸 resize:horizontal只有水平方向拉 resize:vertical只有垂直方向拉伸 但是,此设置要想起作用,必须声明overflow且属性值不是visible! area文本域自带resize属性,并且可以拉伸,这是因为他默认overflow:auto. 详细demo见:resize抱overflow大腿.html 2,text-overflow:ellipsis,文本溢出省略号表示(此特性支持IE8+) 同样,不借助overflow:hidden,无法实现省略号的效果.(同时还需要另外一项设置white-space:nowrap;注释:此属性作用:忽略文本中的空白符,也就是不换行显示) 详细demo见,text-overflow与overflow的hidden属性.html
-                <br>
-                <br> ••overflow与锚点技术 锚链与锚点:锚链是浏览器地址栏中URL的#号后面跟着的字符串,专业名称是哈希, 锚点是页面中与锚链对应的部分. 在地址栏URL的#号后输入特定字符串,页面会定位到id值等于锚链的部分.(马俊我自己解释下,我会在可滚动的页面中添加回到顶部的a标签,这时的a的href为#,也就是给URL#号后添加的特殊字符为空,意味着定位到页面顶端,点击链接将定位到页面顶端) 张老师分享的场景是:a的href是特定的字符串,页面中也有对应的元素,id值正好是a中href设定的特定字符串,当点击a时,页面将定位到特定id值元素的位置. (注释:锚点定位实现的条件1,容器可滚动2,锚点元素在容器内)关于锚点定位的本质:张老师形象描述为,汪星人滚床单.(一个是可滚动容器窗口,一个是超出容器窗口大小的锚点子元素列表) 详情示例见:锚点技术.html
-                <br>
-                <br>•锚点定位的触发 1,URL地址中的锚链与锚点元素 2,可focus的锚点元素处于focus态
-                <br>
-                <br>•锚点定位的作用: 很明显,第一点是:快速定位;第二是:张老师分享技能实例,锚点定位与overflow选项卡技术(现在的应用场景仅仅限于单页无滚动的情况,也就是html无滚动的情况,详情见示例demo:锚点定位与overflow选项卡技术.html)
-            </p>
-            <a href="javascript:;" class="seemore">查看全部</a>
-        </div>
-        <div class="data">
-            <h3>relative相对定位</h3>
-            <p class="txtp" style="height:20px;white-space:nowrap;">
-                •••relative和absolute的相煎关系 relative对absolute的限制作用:1,限制left/top/right/bottom定位;2,限制z-index层级;3,限制在overflow下的嚣张气焰; 解释下第二点的限制z-index层级:当absolute元素的父级设置了relative,并且设置了z-index为数值,非auto时,absolute元素的z-index将失效,它的层级由限制它的父级元素的z-index决定. relative对fixed的限制作用:只有一条,就是z-index的层级. 总结:以上是讲relative具有限制同源属性的功能.relative/absolute/fixed具有同源性,都是position的属性嘛!
-                <br>
-                <br> •••relative和定位 relative的定位有两个特点:1,相对自身;2,无侵入; 解释:相对自身是讲:relative元素使用top/right/left/bottom属性定位时,relative元素是相对于自身原来的位置来移动的.(这点和absolute元素使用这些属性定位不同,absolute是向上寻找限制他的父元素,以确定基准点) 无侵入讲的是:relative元素的位置变化不会影响到页面其他元素的布局,因为,虽然他移动了,但是他原来的位置还是存在的,所以不会影响其他元素的布局
-                <br>
-                <br> •relative下定位属性对立出现时会怎样? 之前我已近领教了absolute下定位属性对立设置的特点,就是拉伸. 但是relative下则是斗争,你是我活.具体就是:当同时设置了left和right时,left起作用,right失效;当同时设置了top和bottom的时候,top起作用,bottom失效.
-                <br>
-                <br> •••relative和z-index层级 1,提高层叠上下文(而且是鬼畜级别的!相当厉害) 2,新建层叠上下文与层级控制:relative元素的z-index属性值是具体的数值时,会新建层叠上下文,如果这时候他的内部还有absolute的子元素,那么子元素的z-index会失效,子元素会继承父元素的层级. 但是,当z-index是auto时,则不再具有限制层级的能力. (注释:IE6/7下,即使relative的z-index属性值是auto,还是会新建层叠上下文,限制内部子元素层级,因此IE6/7下,非常容易出现层级覆盖的bug)
-                <br>
-                <br> •••relative的最小化影响原则---本节老师干货分享 所谓relative的最小化影响原则,指的是尽量降低relative属性对其他元素后布局的潜在影响! 原则1,尽量避免使用relative; 原则2,relative最小化; 总结:主要讲的是absolute不要依赖relative.使用过多会带来比较麻烦的层叠问题.relative最小化是指,如果必须使用relative的时候,单独创建一个新的空容器,将需要的元素包含进来.这样就实现了最小化.而且兼容性ok,可以放心使用.
-            </p>
-            <a href="javascript:;" class="seemore">查看全部</a>
-        </div>
-        <div class="data">
-            <h3>vertical-align属性详解</h3>
-            <p class="txtp" style="height:20px;white-space:nowrap;">•••vertical-align(垂直对齐)家族的基本认识----了解vertical-align支持的属性值以及组成 支持5中属性值类型 1,inherit(继承) 2,线类:baseline(基线,默认属性值)/top/middle/bottom 3,文本类;text-top/text-bottom 4,上标下标类;sub/super 5,数字百分比类;数类值和百分比类(数字类原理:在baseline对齐基础上,上下偏移对应的数字大小;百分比类原理:百分比值是相对于line-height行高计算的) **数字和百分比类:这两类的共性,1;都支持负值;2,行为表现一致 (IE6/7下,vertical-align百分比类不支持小数点行高)
-                <br>
-                <br> •••vertical-align起作用的前提----探讨各种display值对vertical-align的影响 导入场景:经常遇到大家在问,为什么我设置了vertical-align却没有作用? 因为vertical-align起作用是用前提条件的!前提条件是什么呢? vertical-align只应用于inline水平元素(包括inline-block)和table-cell元素 也就是,默认状态下支持:图片,按钮,文字,单元格. 要想让不起作用的情况下起作用,以下两种办法: 1;display更改元素的显示水平 •••vertical-align和line-height *注意了,对于内联元素,vertical-align与line-height虽然看不见,单实际上[到处都是]* 详情见神奇demo vertical-aligntest.html(包含各种示例,及应用) 这里的知识点,一定要参考demo!
-                <br>
-                <br> ••••vertical-align线性属性值(top/middle/bottom)深入理解-------深入理解底线,顶线,中线的表现 定义: middle:元素垂直中心点和父元素基线上1/2 x-height对齐. vertical-align:bottom:inline/inline-block元素:元素底部和整行的底部对齐 vertical-align:top:inline/inline-block元素:元素顶部和整行的顶部对齐
-                <br>
-                <br> •••深入理解vertical-align文本类属性值----说说text-bottom/text-top 定义:vertical-align:text-top:盒子的顶部和父级content area的顶部对齐. vertical-align:text-bottom:盒子的底部和父级content area的底部对齐.
-                <br>
-                <br> •••深入理解vertical-align上标下标类----vertical-align:sub/super (提一下html中的上标和下标,上标&lt;sup&gt;下标&lt;sub&gt;;上标和下标的文字是正常文字大小的3/4左右) 定义:super(上标):提高盒子的基线到父级合适的上标基线位置 sub(下标):降低盒子的基线到父级合适的下标基线位置. 本节老师没有分享实际开发经验,因为张老师写了10年的css,基本上没有用过这类属性,明显不常用,直接下一节.
-                <br>
-                <br> •••vertical-align的实际应用--经验分享 1,小图标和文字对齐,做法:给图标设置vertical-align负值. 2,不定尺寸图片或多行文字的垂直居中;做法:分三步1;需要垂直居中的元素inline-block化;2,添加一个0宽度100%高度的辅助元素;3,主体元素和辅助元素都设置vertical-align:middle.
-            </p>
-            <a href="javascript:;" class="seemore">查看全部</a>
-        </div>
-        <div class="data">
-            <h3>z-index属性详解</h3>
-            <p class="txtp" style="height:20px;white-space:nowrap;">
-                •••z-index基础----了解z-index的语法,支持的属性值等 1,含义:z-index属性指定了元素及其子元素的[z顺序],而[z顺序]可以决定当元素发生覆盖的时候,哪个元素在上面.通常一个较大的z-index值得元素会覆盖较低的那一个. 2,属性值:auto/数值/inherit(继承) 3,基本特性:老师总结了三点*支持负值*支持css3 animation动画;(可能不常用)*在css 2.1时代,需要和定位元素配合使用;
-                <br>
-                <br>•••z-index与css定位属性--理解嵌套表现以及z-index计算规则 *如果定位元素z-index没有发生嵌套,怎样布局? 1,后来居上的准则;2,谁的z-index大,谁在上面;
-                <br>
-                <br>•如果定位元素z-index发生嵌套,怎样布局? 1,祖先优先原则;(注释:前提条件是祖先的z-index是数值,非auto!因为当祖先的z-index为auto的时候,就不会创建新的层叠上下文,也就不会对其内的子元素有任何影响了!)
-                <br>
-                <br>•••理解css中的层叠上下文和层叠水平--元素层叠表现基础且重要的概念 *层叠上下文是html元素中的一个三维概念,表示元素在z轴上有了"可以高人一等". 哪些元素具有层叠上下文呢? 1,页面的根元素天生就具有层叠上下文,称之为"根层叠上下文" 2,z-index值为数值的定位元素也具有层叠上下文; 3,其他属性...... *层叠水平:层叠上下文中的每个元素都有一个层叠水平,决定了同一层叠上下文中元素在z轴上的显示顺序.遵循,后来居上和谁大谁上的层叠准则. 注释:层叠水平和z-index不是一个东西.普通元素也有层叠水平.
-                <br>
-                <br> •••理解元素的层叠顺序 层叠顺序:元素发生层叠时候有着特定垂直显示顺序. ***著名的7阶层叠水平: 正z-index>z-index:auto或者看做z-index为0>inline/inline-block水平盒子>float浮动盒子>block块状水平盒子>负z-index>层叠上下文/background/border; 提出了两个问题:1,为甚么需要这个层叠顺序?当然需要,用来规范元素重叠时候的呈现规则 2,为什么是这样的顺序呢?更符合页面加载的功能和视觉呈现!解释是:层叠顺序最低的是background/border等装饰性的部分,层叠顺序中间的部分是布局的,inline/inline-block一般是显示内容的所以比float层叠优先级高.
-                <br>
-                <br> •••z-index与层叠上下文---解释z-index的实际行为表现 要点1,定位元素默认z-index:auto可以看成是z-index:0; 2,z-index不为auto的定位元素会创建层叠上下文; 3,z-index层叠顺序的比较止步于父级层叠上下文; (注释:z-index:auto和z-index:0的区别:从层叠顺序上讲,两者是等同的;但是从创建层叠上下文上讲,就有了本质的区别.z-index:0;是数字值,所以会创建层叠上下文,z-index:auto则不会创建层叠上下文.//此规则在IE6/7下不成立,在IE6/7下,即使值是auto,也会创建层叠上下文)
-                <br>
-                <br> •••其他css属性与层叠上下文 有哪些呢?张老师一共列举了9项 1,z-index值不为auto的flex项(父元素display:flex|inline-flex). 2,元素的opacity值不是1. 3,元素的transform值不是none. 4,元素的mix-blend-mode值不是normal. 5,元素的filter值不是none(这里指的是css3的属性,而不是IE下的滤镜). 6,元素的isolation值是isolate. 7,position:fixed的声明. 8,will-change指定的属性值为上面任意一个. 9,元素的-webkit-overflow-scrolling为touch. 以上属性创建的层叠上下文的层叠顺序相当于z-index为auto的情况. 以上是不依赖z-index的,现在,依赖z-index的层叠上下文元素的层叠顺序是怎样的呢?取决于z-index的值.
-                <br>
-                <br> •••z-index相关实践分享 1,最小化影响原则(relative课程部分的最小化影响) 目的:避免z-index嵌套层叠关系混乱 原因:1,元素的层叠水平主要由所在的层叠上下文决定2,IE7下z-index:auto也会新建层叠上下文 做法:1,尽量少使用定位属性2,如果使用定位属性,最好将定位属性从容器平级分离为私有小容器;(此部分和relative的最小化影响是一致的) 2,不犯二准则 原因:多人协作以及后期维护;做法:对于非弹窗类元素,尽量不设置z-index值,或者z-index值没有任何道理需要超过2.(张老师经验分享,多年从业经历是单纯页面从来没有过需要设置z-index值大于2的) 3,组件层级计数器 总是会遇到意想不到的高层级元素(可能覆盖我们的弹窗),还有组件的覆盖规则具有动态性. 做法是:提前查看好组件设置的层级值是多少,做到心里有数,然后在此基础上设置新的z-index值.(通过js获得body下子元素的最高z-index值) 4,可访问性隐藏
-            </p>
-            <a href="javascript:;" class="seemore">查看全部</a>
-        </div>
-        <div class="data">
-            <h3>IE条件注释及css&nbsp;hacks</h3>
-            <p class="txtp" style="height:20px;white-space:nowrap;">
-                IE条件注释是一种特殊的HTML注释,这种注释只有IE5.0及以上版本才能够理解.
-                <br>
-                <br> 普通HTML注释格式 &lt;!-- ........ --&gt;
-                <br>
-                <br> IE注释格式: &lt;!--[if IE]&gt; ........&lt;![endif]--&gt;
-                <br>
-                <br> IE注释总结: 1,IE条件注释的基本结构和HTML的注释是一样的.因此IE以外的浏览器会把他们看做普通的注释而忽略他们. 2,IE会根据if条件判断是否解析条件注释里的内容. 3,IE条件注释使用的是HTML结构,因此只能使用在HTML文件里,不能使用在css文件里. 4,IE条件注释的 比较操作符 可以更灵活的对IE版本进行控制,以下是具体内容: *ite :就是less than or to 的简写,也就是小于等于的意思. *it :就是less than的简写,小于的意思. *gte :就是greater than or equal to 的简写,意思是大于等于. *gt :就是greater than 的简写,意思是大于. *! :就是不等于.
-                <br>
-                <br> 示例:&lt;!--[if gt IE5.5]&gt;...&lt;![endif]--&gt;/如果IE版本大于5.5/
-                <br>
-                <br> &lt;!--[if ite IE6]&gt; ...&lt;![endif]--&gt;/如果IE版本小于等于IE6/
-                <br>
-                <br> &lt;!--[if !IE]&gt; .....&lt;![endif]--&gt;/如果浏览器不是IE/
-                <br>
-                <br>
-                <br>
-                <br> IE注释和css hacks的一些区别: 1,hacks是基于浏览器的bug,而这种bug最终可能修复. 2,条件注释是基于IE的特定代码,这种识别机制任何时候都不会被移除 3,每一个浏览器都能看见你的hacks,或许下一个版本或者一个新的浏览器会在你的hacks代码上出错 4,只有IE才能看到条件注释,通过额外的"IE文件"来影响页面,其他浏览器根本就不会下载它 5,hacks用的越多,代码越混乱. 6.条件注释利用版本匹配,使得作者可以容易地对特定的版本写代码.
-            </p>
-            <a href="javascript:;" class="seemore">查看全部</a>
-        </div>
-        <div class="data">
-            <h3></h3>
-            <p class="txtp" style="height:20px;white-space:nowrap;">
-            </p>
-            <a href="javascript:;" class="seemore">查看全部</a>
-        </div>
-        <div class="data">
-            <h3></h3>
-            <p class="txtp" style="height:20px;white-space:nowrap;">
-            </p>
-            <a href="javascript:;" class="seemore">查看全部</a>
-        </div>
-        <div class="data">
-            <h3></h3>
-            <p class="txtp" style="height:20px;white-space:nowrap;">
-            </p>
-            <a href="javascript:;" class="seemore">查看全部</a>
-        </div>
-        <div class="data">
-            <h3></h3>
-            <p class="txtp" style="height:20px;white-space:nowrap;">
-            </p>
-            <a href="javascript:;" class="seemore">查看全部</a>
-        </div>
-        <div class="data">
-            <h3></h3>
-            <p class="txtp" style="height:20px;white-space:nowrap;">
-            </p>
-            <a href="javascript:;" class="seemore">查看全部</a>
-        </div>
-        <div class="data">
-            <h3></h3>
-            <p class="txtp" style="height:20px;white-space:nowrap;">
-            </p>
-            <a href="javascript:;" class="seemore">查看全部</a>
-        </div>
-    </div>
+    </header>
+    <section>
+        <aside>
+            <nav id='chgnav'>
+                <dl>
+                    <dt>基础总结</dt>
+                    <dd class='hide'>
+                        <ul>
+                            <li><a href="javascript:;" class="linker">AJAX基础知识点</a></li>
+                            <li><a href="javascript:;" class="linker">JS在不同浏览器中的差异</a></li>
+                            <li><a href="javascript:;" class="linker">absolute绝对定位</a></li>
+                            <li><a href="javascript:;" class="linker">float浮动知识点总结</a></li>
+                            <li><a href="javascript:;" class="linker">line-height属性详解</a></li>
+                            <li><a href="javascript:;" class="linker">overflow属性详解</a></li>
+                            <li><a href="javascript:;" class="linker">relative相对定位</a></li>
+                            <li><a href="javascript:;" class="linker">vertical-align属性详解</a></li>
+                            <li><a href="javascript:;" class="linker">z-index属性详解</a></li>
+                            <li><a href="javascript:;" class="linker">IE条件注释及css&nbsp;hacks</a></li>
+                        </ul>
+                    </dd>
+                    <dt>git总结</dt>
+                    <dd class='hide'>
+                        <ul>
+                            <li><a href="javascript:;" class='linker'>hello</a></li>
+                            <li><a href="javascript:;" class='linker'>hello1</a></li>
+                            <li><a href="javascript:;" class='linker'>hello2</a></li>
+                            <li><a href="javascript:;" class='linker'>hello3</a></li>
+                            <li><a href="javascript:;" class='linker'>hello4</a></li>
+                        </ul>
+                    </dd>
+                    <dt>nodejs总结</dt>
+                    <dd class='hide'>
+                        <ul>
+                            <li><a href="javascript:;" class='linker'>world</a></li>
+                            <li><a href="javascript:;" class='linker'>world</a></li>
+                            <li><a href="javascript:;" class='linker'>world</a></li>
+                            <li><a href="javascript:;" class='linker'>world</a></li>
+                            <li><a href="javascript:;" class='linker'>world</a></li>
+                        </ul>
+                    </dd>
+                    <dt>fis3总结</dt>
+                    <dd class='hide'>
+                        <ul>
+                            <li><a href="javascript:;" class='linker'>fis3</a></li>
+                            <li><a href="javascript:;" class='linker'>fis3</a></li>
+                            <li><a href="javascript:;" class='linker'>fis3</a></li>
+                            <li><a href="javascript:;" class='linker'>fis3</a></li>
+                            <li><a href="javascript:;" class='linker'>fis3</a></li>
+                        </ul>
+                    </dd>
+                    <dt>python总结</dt>
+                    <dd class='hide'>
+                        <ul>
+                            <li><a href="javascript:;" class='linker'>python</a></li>
+                            <li><a href="javascript:;" class='linker'>python</a></li>
+                            <li><a href="javascript:;" class='linker'>python</a></li>
+                            <li><a href="javascript:;" class='linker'>python</a></li>
+                            <li><a href="javascript:;" class='linker'>python</a></li>
+                        </ul>
+                    </dd>
+                </dl>
+            </nav>
+        </aside>
+        <article>
+            <div id="navi">
+                <a href="javascript:;" id="up">上一页</a>
+                <a href="javascript:;" id="down">下一页</a>
+            </div>
+            <div id="ifrcontent">
+                <iframe src="res/ipage0.html" frameborder="0"></iframe>
+            </div>
+        </article>
+    </section>
     <footer>
-        <address>
-            <h3>联系我</h3>
-            <span>邮箱:<a href="mailto:840798591@qq.com" title="给我发邮件">840798591@qq.com</a></span>
-            <span>电话:15620554342</span>
-        </address>
+        <p><span>Powered by Nativecode&nbsp;|&nbsp;Designed by xiaoma</span></p>
+        <p><span>Copyright©2016-20XX</span></p>
     </footer>
-    <script src="javascripts/index.js"></script>
+    <script src='res/js/index.js'></script>
 </body>
 
 </html>

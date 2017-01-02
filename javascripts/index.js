@@ -1,24 +1,32 @@
 var i;
 var seemore = document.getElementsByClassName("seemore");
 var txtp = document.getElementsByClassName("txtp");
+var con = document.getElementsByClassName('content')[0];
+var sy = [];
 for (i = 0; i < seemore.length; i++) {
     (function(i) {
         var tip;
+
         seemore[i].addEventListener("click", function() {
             if (!tip) {
+                sy[i] = con.scrollTop;
                 this.parentNode.childNodes[3].style.whiteSpace = "normal";
                 this.parentNode.childNodes[3].style.height = "auto";
                 this.innerHTML = "收起";
+
                 // topPosition = this.parentNode.childNodes[3].offsetTop;
 
                 tip = 1;
             } else {
+                con.scrollTop = sy[i];
                 this.parentNode.childNodes[3].style.whiteSpace = "nowrap";
                 this.parentNode.childNodes[3].style.height = "20px";
                 this.innerHTML = "查看全部";
+
                 tip = 0;
                 // this.parentNode.childNodes[3].offsetTop = topPosition + "px";
             }
+
         })
     })(i)
 
