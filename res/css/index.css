@@ -203,6 +203,7 @@ h2 {
     color: #009966;
     margin: 15px 0 0 0;
     padding-left: 25px;
+
 }
 
 p {
@@ -210,7 +211,7 @@ p {
     color: #666666;
     margin: 0;
     padding: 20px 160px 20px 100px;
-    line-height: 20px;
+    line-height: 24px;
     word-wrap: break-word;
 }
 
