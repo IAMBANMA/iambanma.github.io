@@ -190,7 +190,7 @@ iframe {
     width: 100%;
     height: 100%;
     position: absolute;
-    overflow: auto;
+    /* overflow: auto; */
     /* padding: 10px;
     background: #66FFFF;
     position: absolute;
