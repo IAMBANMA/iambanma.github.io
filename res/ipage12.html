@@ -1,3 +1,219 @@
 <link rel="stylesheet" href="css/index.css">
-<h2>hello world2</h2>
-<p>this is my world!2</p>
+<h2>Sass基础教程</h2>
+<p>0.
+    <br>Sass文件后缀名
+    <br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-------.sass,不适用大括号和分号;
+    <br> 分两种:|
+    <br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-------.scss,这种和我们平时写的css文件格式差不多,适用大括号和分号.
+    <br> 1.
+    <br>使用变量:sass一个重要的特性是它为css引入了变量.你可以把反复使用的css属性值定义成变量,然后通过变量名来引用它们.
+    <br> sass使用$符号来标识变量.
+    <br> 1-1
+    <br>•••变量声明:sass的变量声明和css属性的声明很像:
+    <br>$highlight-color:#f90;
+    <br> 现在$highlight-colot的值就是#F90.
+    <br> •••任何可以用作css属性值的赋值都可以用作sass的变量值,甚至是以空格分割的多个属性值,比如$basic-border:1px solid black;,或以逗号分割的多个属性值,比如$plain-font:'myriad pro','myriad';
+    <br> •••变量的作用域:与css属性不同,变量可以在css规则块定义之外存在,相当于全局变量.当变量定义在css规则块内,那么该变量只能在此规则块内使用,类似局部变量.
+    <br> 如果它们出现在任何形式的{...}块中,包括@media或者@font-face块中也是如此
+    <br> 1-2
+    <br>•••变量引用:凡是css属性的标准值可能存在的地方,变量就可以使用.css生产时,变量会被它们的值所替代.之后,如果你需要一个不同的值,只需要改变这个变量值,则所有引用此变量的地方生成的值都会随之改变.
+    <br> 1-3
+    <br>•••变零名用中划线还是下划线:sass并不强迫一定使用中划线或者下划线,所以这两种用法相互兼容.
+    <br> 使用中划线声明的变量可以使用下划线的方式引用.反之亦然.
+    <br> 2
+    <br>•••嵌套CSS规则:css中重复写选择器是非常恼人的.
+    <br> 如果要写一大串指向页面中同一块的样式时,往往需要一遍又一遍地写同一个ID
+    <br> #content article h1 {color:#333}
+    <br> #content article p {margin-bottom:1.4em}
+    <br> #content aside {background:#EEE}
+    <br> 像这种情况,sass可以让你只写一遍,且使样式可读性更高.
+    <br> #content {
+    <br> article {
+    <br> h1 {color:#333}
+    <br> p { margin-bottom:1.4em}
+    <br> }
+    <br> aside {backgorund:#eee}
+    <br> }
+    <br> 编译后输出的css和上面的效果一样.
+    <br> 2-1
+    <br> •••父选择器的标识符&;
+    <br> 一般情况下,sass解开一个嵌套规则时就会把父选择器通过一个空格链接到子选择器前面.这种在css里成为后代选择器.比如上面的例子.
+    <br> 但是,在有些情况下你却不会希望sass使用这种后代选择器的方式生成这种链接.这时候可以使用父选择器&.
+    <br> 2-2
+    <br> •••群组选择器的嵌套;
+    <br> 在css中,选择器h1,h2,h3会同时命中h1元素,h2元素和h3元素.与此类似,.button button会命中button元素和类名为.button的元素.这种选择器称为群组选择器.
+    <br> 群组选择器的规则会对命中群组中任何一个选择器的元素生效.
+    <br> css形式:.container h1, .container h2, .container h3{ margin:.8em}
+    <br> sass形式:.container{
+    <br> h1,h2,h3{margin:.8em}
+    <br> }
+    <br> 或者nav,aside{
+    <br> a {color:blue}
+    <br> }
+    <br> 编译后:nav a{color:blue},aside a{color:blue};
+    <br> 2-3
+    <br> 子组合选择器和同层组合选择器:>,+,~
+    <br> 上边这三个组合选择器必须和其他选择器配合使用,以指定浏览器仅选择某种特定上下文中的元素.
+    <br> 这些组合选择器可以毫不费力地应用到sass的规则嵌套中.•••可以把它们放在外层选择器的后面,里层选择器的前边.
+    <br> article{
+    <br> ~ article {border:1px solid #ccc}
+    <br> > section {background:#eee}
+    <br> dl > {
+    <br> dt{color:#ccc}
+    <br> dd{color:#fff}
+    <br> }
+    <br> nav+&{margin:0}
+    <br> }
+    <br> 编译成css后如下:
+    <br> article ~ article {border:1px solid #ccc}
+    <br> article > section {background:#eee}
+    <br> article dl > dt {color:#ccc}
+    <br> article dl > dd {color:#fff}
+    <br> nav+article {margin:0}
+    <br> sass如愿地将这些嵌套规则一一解开组合在一起.
+    <br> 2-4
+    <br> •••属性嵌套
+    <br> 在sass中,除了css选择器,属性也可以进行嵌套.
+    <br> 尽管编写属性涉及的重复不像编写选择器那么糟糕,但是反复写border-style,border-width,border-color以及border-*等死非常烦人的.
+    <br> 在sass中,你只需要敲一遍border:
+    <br> nav{
+    <br> border:{
+    <br> style:solid;
+    <br> width:1px;
+    <br> color:#ccc
+    <br> }
+    <br> }
+    <br> •••嵌套属性的规则是这样的:把属性名从中划线的地方断开,在根属性后边添加一个冒号,紧跟着一个大括号块,把子属性部分写在这个大括号块中.
+    <br> 就像css选择器嵌套一样,sass会把你的子属性一一解开,把根属性和子属性通过中划线链接起来,最后生成的效果和你手动一遍遍写的css样式一样.
+    <br> •••对于属性的缩写形式,你甚至可以像下边这样来嵌套,指明例外的规则:
+    <br> nav{
+    <br> border:1px solid #ccc {
+    <br> left:0px;
+    <br> right:0px;
+    <br> }
+    <br> }
+    <br> 3
+    <br> 导入sass文件
+    <br> css有一个特别不常用的特性,即@import规则,它允许一个css文件中导入其他css文件.然而,后果是只有执行到@import时,浏览器才回去下载其他css文件,这导致页面加载起来特别慢.
+    <br> •••sass也有一个@import规则,但不同的是,sass的@import规则在生成css文件时就把相关文件导入进来.这意味着所有相关的样式被归纳到了同一个css文件中,无需发起额外的下载请求.
+    <br> 使用sass的@import规则并不需要指明被导入文件的全名(可以省略文件后缀名.sass或者.scss)
+    <br> 3-1.使用SASS部分文件;
+    <br> 这里是指通过@import将一个文件a导入文件b中,由b生成最终的css文件.这里的a文件并不需要生成独立的css文件,这样的文件称为局部文件.对此,sass有一个特殊的约定来命名这些文件.
+    <br> •••此约定即:sass局部文件的文件名以下划线开头.
+    <br> 这样,sass就不就在编译时单独编译这个文件输出css,而只是把这个文件用作导入.(其实,当使用@import导入一个局部文件时,是可以省略文件名开头的下划线的.)
+    <br> 3-2.默认变量值;
+    <br> 当你写了一个可被他人通过@import导入的sass库文件时,你可能希望导入者可以定制修改sass库文件中的某些值.
+    <br> •••sass通过!default标签来实现默认变量值
+    <br> $width:400px !default;
+    <br> .fancybox {
+    <br> width:$width;
+    <br> }
+    <br> 在上面的例子中,如果用户在导入局部文件之前声明了一个$width变量,那么逼得局部文件中对$width赋值400px的操作是无效的.如果用户没有做这样的声明,则$width将默认为400px.
+    <br> 3-3.嵌套导入
+    <br> •••也就是说,sass允许@import命令写在css规则内.这种导入方式下,生成对应的css文件时,局部文件会被直接插入到css规则内导入它的地方.
+    <br> 3-4.原生的css导入;
+    <br> sass是兼容原生css的,所以它也支持原生的CSS@import.
+    <br> 尽管通常在sass中使用@import时,sass会尝试找到对应的sass文件并导入进来,但是在下列三种情况下会生成原生的CSS@import,尽管这会造成浏览器解析css时的额外下载:
+    <br> •被导入文件的名字以.css结尾
+    <br> •被导入文件的名字是一个URL地址,由此可用谷歌字体API提供的相应服务
+    <br> •被导入文件的名字是CSS的url()值.
+    <br> 4.静默注释;
+    <br> 静默注释就是用户在浏览网站源码时看不到的注释.
+    <br> 正常的css注释是/*...*/的形式,其内容在浏览源码时可见的.
+    <br> sass另外提供了一种不同于css标准注释格式的注释语法,即静默注释(//)
+    <br> 其内容不会出现在生成的css文件中.
+    <br> •••(实际上,css的标准注释格式内的注释内容也可以在生成的css文件中抹去,当注释出现在原生css不允许的地方,比如css属性或者选择器中,sass会将其抹去)
+    <br> eg:
+    <br> body{
+    <br> color/*这块注释内容不会出现在生成的css中*/:#333;
+    <br> padding:1;/*这块注释内容也不会出现在生成的css中*/0;
+    <br> }
+    <br> 5.混合器;
+    <br>
+   如果你的整个网站中有几处小小的样式类似,那么使用变量来统一处理这种情况是非常不错的选择.但是当你的样式变得越来越复杂,你需要大段大段的重用样式的代码,独立的变量就没有办法应付这种情况了.你可以通过sass的混合器实现大段样式重用<br>
+<br>
+•••混合器使用@mixin标识符定义,这个标识符给一大段样式赋予一个名字,这样你就可以轻易地通过引用这个名字重用这段样式.  <br>
+•••可以在你的样式表中通过@include来使用这个混合器,放在你希望的任何地方.(@include调用会把混合器中的所有样式提取出来放在@include被调用的地方)<br>
+下边这段代码定义了一个非常简单的混合器,目的是添加跨浏览器的圆角边框.<br>
+@mixin rounded-corners{<br>
+-moz-border-radius:5px;<br>
+-webkirt-border-radius:5px;<br>
+border-radius:5px;<br>
+}    <br>
+调用示例:<br>
+notice{<br>
+background:green;<br>
+border:2px solid #ccc;<br>
+@include rounded-corners;<br>
+}<br>
+sass最终生成:<br>
+.notice{<br>
+background:green;<br>
+border:2px solid #ccc;<br>
+-moz-border-radius:5px;<br>
+-webkit-border-radius:5px;<br>
+border-radius:5px;<br>
+}<br>
+5-1.混合器中的CSS规则;<br>
+混合器中不仅可以包含属性,也可以包含css规则,包含选择器和选择器中的属性,如下代码:<br>
+@mixin no-bullets{<br>
+list-style:none;<br>
+li {<br>
+list-style-image:none;<br>
+list-style-type:none;<br>
+margin-left:0px;<br>
+}<br>
+}<br>
+•••当一个包含css规则的混合器通过@include包含在一个父规则中时,在混合器中的规则最终会生成父规则中的嵌套规则.<br>
+5-2.给混合器传参;<br>
+混合器并不一定总得生成相同的样式.可以通过在@include混合器时给混合器传参,来定制混合器生成的精确样式.<br>
+当@include混合器时,参数其实就是可以赋值给css属性值的变量.<br>
+@mixin link-colors($normal,$hover,$visited){<br>
+color:$normal;<br>
+&:hover{color:$hover;}<br>
+&:visited{color:$visited;}<br>
+}<br>
+当混合器被@include时,你可以把它当做一个css函数来传参.<br>
+a{<br>
+@include link-colors(blue,red,green);<br>
+}<br>
+sass最终生成的是:<br>
+a {color:blue;}<br>
+a:hover{color:red;}<br>
+a:visited{color:green;}<br>
+<br>
+当你@include混合器时,有时候可能会很难区分每个参数是什么意思,参数之间是一个什么样的顺序.为了解决这个问题,sass允许通过语法$name:value的形式指定每个参数的值.这种形式的传参,参数的顺序就不必在乎了,只要没有漏掉就行.<br>
+a{<br>
+@inclule link-colors($normal:blue,$visited:green,$hover:red);<br>
+}<br>
+5-3默认参数值;<br>
+为了在@include混合器时不必传入所有的参数,我们可以给参数指定一个默认值.参数默认值使用$name:default-value的声明形式,默认值可以使任何有效的css属性值,甚至是其他参数的引用.<br>
+@mixin link-colors($normal,$hover:$normal,$visited:$normal){<br>
+color:$normal;<br>
+&:hover{color:$hover;}<br>
+&:visited{color:$visited;}<br>
+}<br>
+6.使用选择器继承来精简CSS;<br>
+使用sass的时候,最后一个减少重复的主要特性就是选择器继承.<br>
+基于Nicole Sullivan面向对象的css的理念,选择器继承是说一个选择器可以继承为另一个选择器定义的所有样式.<br>
+•••这个通过@extend语法实现,如下代码:<br>
+.err{border:1px red;background:#ccc;}<br>
+.seriousError{@extend .error;border-width:3px;}<br>
+在上边的代码中,.seriousError将会继承样式表中任何位置处为.error定义的所有样式.(不仅会继承.error自身的所有样式,任何跟.error有关的组合选择器样式也会被.seriousError以组合选择器的形式继承)<br>
+6-1何时使用继承<br>
+sass就是用来精简css的,因此使用sass的那个特性更加合理,是需要仔细权衡的.<br>
+7小结<br>
+本文介绍了sass最基本的部分,你可以轻松使用sass编写清晰,无冗余,语义化的css.<br>
+变量是sass提供的最基本的工具.通过变量可以让独立的css值变得可重用,无论是在一条单独的规则范围内还是在整个样式表中.<br>
+变量,混合器的命名甚至sass的文件名,可以互换通用_和-.<br>
+同样基础的是sass的嵌套机制,嵌套允许css规则内嵌套css规则,减少重复编写常用的选择器,同时让样式表的结构一眼望去更加清晰.<br>
+sass同时提供了特殊的父选择器标识符&,通过它可以构造出更高效的嵌套<br>
+sass的样式导入时另一个重要的特性.通过样式导入可以把分散在多个sass文件中的内容合并生成一个css文件,避免了项目中有大量css文件通过原生的CSS@import带来的性能问题,通过嵌套导入和默认变量值,导入可以构建更强有力的可定制的样式.<br>
+混合器允许用户编写语义化样式的同时避免视觉上样式的重复.<br>
+最后我们学习了与混合器相辅相成的选择器继承.继承允许你声明类之间语义化的关系,通过这些关系可以保持你的css的整洁性和可维护性.
+
+
+
+
+
+</p>

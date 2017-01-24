@@ -190,6 +190,7 @@ iframe {
     width: 100%;
     height: 100%;
     position: absolute;
+    overflow: auto;
     /* padding: 10px;
     background: #66FFFF;
     position: absolute;
@@ -330,5 +331,10 @@ footer p {
         padding: 0;
         text-align: center;
         font-size: 12px;
+    }
+    #stdmodel{
+        width: 350px;
+        height: 200px;
+        margin-left: -30px;
     }
 }

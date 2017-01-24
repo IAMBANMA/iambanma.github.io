@@ -1,0 +1,40 @@
+0 info it worked if it ends with ok
+1 verbose cli [ '/usr/local/Cellar/node/4.2.1/bin/node',
+1 verbose cli   '/usr/local/bin/npm',
+1 verbose cli   'doc',
+1 verbose cli   '.' ]
+2 info using npm@3.8.6
+3 info using node@v4.2.1
+4 verbose config Skipping project config: /Users/mac/.npmrc. (matches userconfig)
+5 silly docs [ '.' ]
+6 silly getDoc .
+7 silly fetchPackageMetaData .
+8 silly fetchOtherPackageData .
+9 silly cache add args [ '.', null ]
+10 verbose cache add spec .
+11 silly cache add parsed spec Result {
+11 silly cache add   raw: '.',
+11 silly cache add   scope: null,
+11 silly cache add   name: null,
+11 silly cache add   rawSpec: '.',
+11 silly cache add   spec: '/Users/mac/iambanma.github.io/res',
+11 silly cache add   type: 'local' }
+12 error addLocal Could not install /Users/mac/iambanma.github.io/res
+13 silly fetchPackageMetaData Error: EISDIR: illegal operation on a directory, read
+13 silly fetchPackageMetaData     at Error (native)
+13 silly fetchPackageMetaData  error for . { [Error: EISDIR: illegal operation on a directory, read] errno: -21, code: 'EISDIR', syscall: 'read' }
+14 verbose stack Error: EISDIR: illegal operation on a directory, read
+14 verbose stack     at Error (native)
+15 verbose cwd /Users/mac/iambanma.github.io/res
+16 error Darwin 16.1.0
+17 error argv "/usr/local/Cellar/node/4.2.1/bin/node" "/usr/local/bin/npm" "doc" "."
+18 error node v4.2.1
+19 error npm  v3.8.6
+20 error code EISDIR
+21 error errno -21
+22 error syscall read
+23 error eisdir EISDIR: illegal operation on a directory, read
+24 error eisdir This is most likely not a problem with npm itself
+24 error eisdir and is related to npm not being able to find a package.json in
+24 error eisdir a package you are trying to install.
+25 verbose exit [ -21, true ]
