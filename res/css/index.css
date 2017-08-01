@@ -27,7 +27,7 @@ section a:hover {
     color: #009966;
 }
 
-body {}
+
 
 header {
     position: relative;
@@ -55,8 +55,8 @@ header {
 
 #logotext {
     font-style: italic;
-    font-weight: bolder;
-    font-variant: small-caps;
+/*     font-weight: lighter;
+ */    font-variant: small-caps;
     font-size: 35px;
     line-height: 55px;
 }
@@ -106,6 +106,7 @@ dt {
     line-height: 35px;
     text-indent: 35px;
     border-bottom: 1px solid #ddd;
+    /* font-weight: lighter; */
     /* border-top: 1px solid #ddd;
     outline: 1px solid #ddd;
     margin-bottom: 2px;
@@ -204,6 +205,7 @@ h2 {
     color: #009966;
     margin: 15px 0 0 0;
     padding-left: 25px;
+    font-weight: lighter;
 
 }
 
@@ -214,6 +216,7 @@ p {
     padding: 20px 160px 20px 100px;
     line-height: 20px;
     word-wrap: break-word;
+    /* font-weight: lighter; */
 }
 
 section:after {

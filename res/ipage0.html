@@ -1,5 +1,6 @@
 <link rel="stylesheet" href="css/index.css">
-    <h2>AJAX基础知识点</h2>
+    <div class="child">
+        <h2>AJAX基础知识点</h2>
     <p>总结一下JavaScript的ajax. 定义:AJAX=asynchronous javascript and XML(异步的javascript和XML) AJAX不是新的编程语言,而是一种使用现有标准的新方法.实现:在不重新加载整个页面的情况下,与服务器交换数据并更新局部网页.
         <br>
         <br>••工作原理:浏览器[1,发生某个事件...2,常见XMLHttpRequest对象;3,发送HttpRequest]-->internet-->服务器[1,处理HttpRequest;2,创建响应并将数据返回浏览器]-->Internet-->浏览器[1,使用js处理被返回的数据;2,更新页面内容]
@@ -15,3 +16,6 @@
         <br>••AJAX的onreadystatechange事件; readystate属性:储存着XMLHttpRequest的状态,它的值有5个,是从0到4;0:代表请求未初始化;1:代表服务器连接已将建立;2:代表请求已经接受;3:代表请求处理中;4:代表处理完成,且响应已经就绪. status属性:取值200 ok;取值404,未找到页面 onreadystatechange事件会基于readystate值的改变触发,所以在readystate从0到4变化时,onreadystatechange事件被触发了5次.
         <br>
         <br>••当页面有多个XHR的时候,代码量会增大,需要适当优化,相同的代码重复使用,考虑使用带参数的回调函数方法解决.</p>
+
+    </div>
+    
