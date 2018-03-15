@@ -1,0 +1,74 @@
+<link rel="stylesheet" href="css/index.css">
+<h2>git简要</h2>
+<p>
+    •••创建新仓库
+    <br> 创建新文件夹,打开,然后执行--->git init
+    <---以创建新的git仓库.<br>
+        <br>
+        <br> •••克隆仓库
+        <br> 执行如下命令以创建一个本地仓库的克隆版本--->git clone /path/to/repository
+        <---<br>
+            如果是远端服务器上的仓库,执行如下命令将在本地创建一个本地克隆版--->git clone username@host:/path/to/repository
+            <---<br>
+                <br>
+                <br> •••工作流
+                <br> 你的本地仓库由git维护的三棵"树"组成.第一个是你的(工作目录),它持有实际文件;
+                <br> -----------------------------|-------------------------------------------------
+                <br> ----------------------------add------------------------------------------------
+                <br> -----------------------------|-------------------------------------------------
+                <br> 第二个是(缓存区),它像个缓存区域,临时保存你的改动;
+                <br> -----------------------------|-------------------------------------------------
+                <br> ----------------------------commit----------------------------------------------
+                <br> -----------------------------|-------------------------------------------------
+                <br> 最后是(head),指向你最近一次提交的结果.
+                <br>
+                <br>
+                <br> •••添加与提交
+                <br> 添加是将文件改动的文件添加到缓存区,使用--->git add filename
+                <---添加指定文件名的文件;或者通过--->git add *
+                    <---添加所有文件.这是git基本工作流程的第一步.<br>
+                        提交是将缓存区的内容提交到head.使用命令--->git commit -m "代码提交信息"
+                        <---,但是还没有提交的远端仓库.<br>
+                            <br>
+                            <br> •••推送改动
+                            <br> 你的改动现在已经在本地仓库的head中了,执行命令--->git push origin master
+                            <---将改动提交到远端仓库.(可以把master换成你想要推送的任何分支).<br>
+                                如果你还没有克隆现有仓库,并欲将你的仓库连接到某个远程服务器,你可以使用命令--->git remote add origin [server]
+                                <---添加.这样你就能够将你的改动推送到所添加的服务器上了.<br>
+                                    <br>
+                                    <br> •••分支
+                                    <br> 分支是用来将特性开发绝缘开来的.在你创建仓库的时候,master是默认的.在其他分支上进行开发,完成后再将它们合并到主分支上.
+                                    <br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; feature_x
+                                    <br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; /--------------------\
+                                    <br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; / &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; master &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; \
+                                    <br> ---------/---------------------------\------------------>
+                                    <br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; (branch) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; (merge)
+                                    <br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+创建一个叫做feature_x的分支,并切换过去是用命令--->git checkout -b feature_x<---<br>
+切换回主分支使用命令--->git checkout master<---<br>
+在把新建的分支删掉,使用命令--->git branch -d feature_x<---<br>
+除非你将分支推送到远端仓库,不然该分支别人是看不到的,使用命令--->git push origin [branch]<---<br>
+<br><br>
+•••更新与合并<br>
+更新你的本地仓库至最新改动,执行命令--->git pull<---拉取远端仓库新版本,以便在你的工作目录中获取(fetch)并合并(merge)远端的改动.<br>
+使用命令--->git merge [branch]<---合并其他分支到你的当前分支.<br>
+一般git都会尝试去自动合并改动.不幸的是,自动合并并非次次都能成功,并可能导致冲突(conflicts).这时候就需要你修改这些文件来人肉合并这些冲突了.改完之后,你需要执行--->git add filename<---命令将它们标记为合并成功.<br>
+在合并改动之前,也可是使用命令--->git diff [source_branch] [target_branch]<---来查看.<br>
+<br><br>
+•••标签<br>
+在软件发布时创建标签是被推荐的.这是个旧有概念,在SVN中也有.可以执行如下命令创建一个1.0.0的标签--->git tag 1.0.0 1b2e1<---<br>
+上面的1b2e1是你想要标记提交ID的前5为字符,可以使用命令--->git log<---获取提交ID.<br>
+<br><br>
+•••参考手册<br>
+•<a href="https://git-scm.com/book/zh/v2" target="_blank">git参考手册</a>(!!!很全面的教材) <br>
+•<a href="http://marklodato.github.io/visual-git-guide/index-en.html" target="_blank">图形化git指南</a> (图文并茂)<br>
+
+
+
+
+
+
+
+
+
+</p>

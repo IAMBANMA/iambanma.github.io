@@ -1,0 +1,45 @@
+<link rel="stylesheet" href="css/index.css">
+
+            <h2>overflow属性详解</h2>
+            <p>•••overflow基本属性:基本表现,包括兼容性 基本属性值visible(默认)/hidden/scroll/auto/inherit(不常用,各种兼容的问题) 属性表现见示例:overflow基本属性表现 css3的overflow-x和overflow-y(IE8+) 注:如果overflow-x和overflow-y的值不同,且其中一个赋值visible,另一个赋值为hidden/auto/scroll,那么,被赋值为visible的将自动重置为auto.一定要注意哦!
+                <br>
+                <br> •兼容性 1,滚动条样式,各家浏览器不一样 2,宽度设定机制:示例 &lt;div class="box"&gt;&lt;div class="content"&gt;&lt;/div&gt;&lt;/div&gt; .box{width:400px;height:100px;overflow:auto;} .content{width:100%;height:200px;} 示例解释,以上html是两个div,一个是容器,一个是内容子元素.css设置容器的高度为100px,overflow:auto;子元素的高度为200px,表现应该是只出现垂直的滚动条,但是实际情况是,IE7下水平滚动条也出现了.为什么?因为宽度的设定机制,IE7下子元素的width:100%将父容器的400px当做宽度,垂直滚动条的出现使得宽度不足400px,因此出现了水平滚动条.(IE8+表现ok,没有此兼容问题)怎样解决呢?很简单,删除width:100%就ok了>
+                <br>
+                <br> •overflow起作用的前提是: 1,非display:inline水平 2,对应方位的尺寸限制.width/height/max-width/max-height/absolute拉伸 3,对于单元格td等,还需要table为table-layout:fixed状态才行
+                <br>
+                <br> •分享劲爆小技巧 overflow:visible妙用 IE7浏览器下,按钮中的文字越多,按钮两侧padding留白也越大.其他浏览器表现正常.怎样解决呢? 给按钮添加overflow:visible,ok.
+                <br>
+                <br> •••overflow与滚动条---滚或不滚,我就在那里 tips:无论什么浏览器,默认滚动条均来自于&lt;html&gt;!而不是&lt;body&gt;. IE7浏览器,默认总是有一个垂直滚动条 IE8+浏览器,默认则是overflow:auto状态,内容不足一屏时,没有滚动条,多于一屏才出现. 所以**如果我们想去除页面默认滚动条,只需要 html{overflow:hidden;}即可.而不需要html,body{overflow:hidden;}body多余,躺枪!!!!!
+                <br>
+                <br> •js与滚动条 chrome浏览器:document.body.scrollTop; 其他浏览器是:document.documentElement.scrollTop; 所以,获取滚动高度时应使用兼容模式: var st=document.body.scrollTop ||document.documentElement.scrollTop;
+                <br>
+                <br> •tips overflow的padding-bottom缺失现象: .box{width:400px;height:100px;padding:100px 0;overflow:auto;}解释:例子中设置了padding:100px 0;所以正常来说内容的上下会有100px的padding,实际情况是,chrome浏览器正常表现,其他所有的浏览器都缺失了padding-bottom.(这样导致了:不一样的scrollheight(元素内容高度)见overflow缺失paddingbottom示例.)((注释:马俊自己试了一下,这个知识点现在各浏览器表现一致))
+                <br>
+                <br> •滚动条的宽度机制 一句话:滚动条会占据容器的可用宽度 怎样计算滚动条的尺寸呢? .box{widht:400px;overflow:scroll;} .in{*zoom:1;/* for IE7 */} &lt;div class="box"&gt; &lt;div id="in" class="in"&gt;&lt;/div&gt; &lt;/div&gt; console.log(400-document.getElementById("in").clientWidth); 详细示例见demo 计算滚动条的宽度.html
+                <br>
+                <br> •overflow:auto的潜在布局隐患 滚动条会占据容器尺寸,原本和谐的布局,滚动条出现后可能会挂掉! 解决办法:使用自适应布局或者预留滚动条的宽度.
+                <br>
+                <br> •水平居中跳动问题 绝大多数的浏览器是水平居中对齐的,当滚动条出现时,就会出现水平居中跳动问题.(.container{width:100%;margin:0 auto;}) 怎样修复呢?1,给页面默认设定滚动栏html{overflow-y:scroll;}(IE6/7/8下使用) 2,.container{padding-left:calc(100vw-100%);}(兼容IE9+) 解释:添加padding-left修复,100vw是浏览器的宽度,100%是可用内容的宽度,相减就是滚动栏的宽度. 详细示例见demo,水平居中跳动修复.html(IE9+但是马俊自己试了一下,没有什么明显的效果,不过对css单位有了有了了解,vw是相对视窗的宽度的单位,1vw是视窗宽度的百分之一,依次类推)
+                <br>
+                <br> •自定义滚动条 webkit: 整体部分::-webkit-scrollbar 两端按钮::-webkit-scrollbar-button 外层轨道::-webkit-scrollbar-track 内层轨道::-webkit-scrollbar-track-piece 滚动滑块::-webkit-scrollbar-thumb 边角::-webkit-scrollbar-Corner 还有,hover态,水平态,垂直态等 实际开发中常用的就是下面三个 ::-webkit-scrollbar{width:8px;height:8px;}/*血槽宽度*/ ::-webkit-scrollbar-thumb{background-color:rgba(0,0,0,.3);border-radius:6px;}/*拖动条*/ ::-webkit-scrollbar-track{background-color:#ddd;border-radius:6px;}/*背景槽*/
+                <br>
+                <br> •IE自定义滚动条(这里不展开讲了,因为IE自定义滚动条实在是丑到恶心,建议放弃)
+                <br>
+                <br>•滚动条自定义插件 jquery滚动条自定义插件: 项目页面:http://manos.malihu.gr/jquery-custom-content-scroller/ github地址:http://github.com/malihu/malihu-custom-scrollbar-plugin 兼容性IE8+
+                <br>
+                <br> •分享移动端滚动技能 在iOS下原生滚动回弹效果,可以通过-webkit-overflow-scrolling:touch;让滚动具有原生效果般的回弹效果.
+                <br>
+                <br> ••overflow与BFC--清除浮动,自适应布局等 BFC:块级格式化上下文:解释:页面之结界,内部元素再怎样翻云覆雨都不会影响外部. overflow可以触发BFC,但是不是所有的overflow属性都可以,只有overflow:hidden/auto/scroll可以.(应用1,清除浮动影响;2,避免margin穿透问题;3,两栏自适应布局) 1.详细效果看demo overflow清除浮动影响.html(内部浮动无影响,支持IE7+,.clearfix{overflow:hidden;_zoom:1;}注释:此设置无法广泛应用,适合局部,记得float部分清除浮动的最优样式是.clearfix{*zoom:1;}.clearfix{content:'';display:table;clear:both;} 2.避免margin穿透demo;(我自己试了下,没有老师讲的bug,所以也没有实现)注释:避免margin穿透的其他方法:设置边框,padding,或者margin自身元素BFC化. 3.这个就内容就有点多啦!详细demo见overflow与两栏自适应布局.html (注释:注意流体自适应布局与BFC自适应布局的差异,不可以混杂在一起,如果使用了流体自适应布局时,不小心触发了BFC,可能会出现不想要的效果.)
+                <br>
+                <br> •触发BFC的各种属性有哪些?哪些又适合两栏自适应布局呢? 1,overflow:hidden;自适应,但是"溢出不可见"限制应用场景 2,float+float 包裹性+破坏性,无法自适应,适合块状浮动布局 3,position:absolute脱离文档流,自娱自乐,不适合 4,display:inline-block;包裹性,无法自适应,IE6/7block水平不识别inline-block 5,display:table-cell,包裹性,天生无溢出特性,绝对宽度也能自适应 两栏自适应布局方案 .cell{ display:table-cell;width:2000px;//IE8+ BFC特性 *display:inline-block;*width:auto; //IE7- 伪BFC特性(只适用于IE6/7的block元素) } 以上方案,功能强大,兼容性强,推荐!
+                <br>
+                <br> ••overflow与绝对定位--隐藏失效与滚动固定 隐藏失效:文档定义:绝对定位元素不总是被父级overflow属性剪裁,尤其当overflow在绝对定位元素及其包含块之间的时候.(包含块:指含有position:absolute/relative/fixed声明的父辈元素,如果没有则是body元素) 示例场景1描述:一个容器内有一张大于容器尺寸的图片,当容器设置overflow:hidden的时候,图片会被剪裁,这时候给图片添加属性position:absolute,那么剪裁失效了. 怎样解决这样的问题呢? 根据以上定义,找解决方案.定义指出,当overflow的元素在绝对定位元素及绝对定位元素包含块(含有position属性的父级才是包含块,)之间时,剪裁才失效,我们可以让overflow元素自身成为包含块,或者overflow的子元素成为包含块就可以了. 详细demo见 overflow与隐藏失效.html
+                <br>
+                <br> ••依赖overflow的样式表现----大腿抱起来 1,resize拉伸 css3有个属性名resize,可以拉伸元素尺寸: resize:both水平垂直两个方向拉伸 resize:horizontal只有水平方向拉 resize:vertical只有垂直方向拉伸 但是,此设置要想起作用,必须声明overflow且属性值不是visible! area文本域自带resize属性,并且可以拉伸,这是因为他默认overflow:auto. 详细demo见:resize抱overflow大腿.html 2,text-overflow:ellipsis,文本溢出省略号表示(此特性支持IE8+) 同样,不借助overflow:hidden,无法实现省略号的效果.(同时还需要另外一项设置white-space:nowrap;注释:此属性作用:忽略文本中的空白符,也就是不换行显示) 详细demo见,text-overflow与overflow的hidden属性.html
+                <br>
+                <br> ••overflow与锚点技术 锚链与锚点:锚链是浏览器地址栏中URL的#号后面跟着的字符串,专业名称是哈希, 锚点是页面中与锚链对应的部分. 在地址栏URL的#号后输入特定字符串,页面会定位到id值等于锚链的部分.(马俊我自己解释下,我会在可滚动的页面中添加回到顶部的a标签,这时的a的href为#,也就是给URL#号后添加的特殊字符为空,意味着定位到页面顶端,点击链接将定位到页面顶端) 张老师分享的场景是:a的href是特定的字符串,页面中也有对应的元素,id值正好是a中href设定的特定字符串,当点击a时,页面将定位到特定id值元素的位置. (注释:锚点定位实现的条件1,容器可滚动2,锚点元素在容器内)关于锚点定位的本质:张老师形象描述为,汪星人滚床单.(一个是可滚动容器窗口,一个是超出容器窗口大小的锚点子元素列表) 详情示例见:锚点技术.html
+                <br>
+                <br>•锚点定位的触发 1,URL地址中的锚链与锚点元素 2,可focus的锚点元素处于focus态
+                <br>
+                <br>•锚点定位的作用: 很明显,第一点是:快速定位;第二是:张老师分享技能实例,锚点定位与overflow选项卡技术(现在的应用场景仅仅限于单页无滚动的情况,也就是html无滚动的情况,详情见示例demo:锚点定位与overflow选项卡技术.html)</p>
+        

@@ -1,0 +1,15 @@
+<link rel="stylesheet" href="css/index.css">
+
+            <h2>vertical-align属性详解</h2>
+            <p>•••vertical-align(垂直对齐)家族的基本认识----了解vertical-align支持的属性值以及组成 支持5中属性值类型 1,inherit(继承) 2,线类:baseline(基线,默认属性值)/top/middle/bottom 3,文本类;text-top/text-bottom 4,上标下标类;sub/super 5,数字百分比类;数类值和百分比类(数字类原理:在baseline对齐基础上,上下偏移对应的数字大小;百分比类原理:百分比值是相对于line-height行高计算的) **数字和百分比类:这两类的共性,1;都支持负值;2,行为表现一致 (IE6/7下,vertical-align百分比类不支持小数点行高)
+                <br>
+                <br> •••vertical-align起作用的前提----探讨各种display值对vertical-align的影响 导入场景:经常遇到大家在问,为什么我设置了vertical-align却没有作用? 因为vertical-align起作用是用前提条件的!前提条件是什么呢? vertical-align只应用于inline水平元素(包括inline-block)和table-cell元素 也就是,默认状态下支持:图片,按钮,文字,单元格. 要想让不起作用的情况下起作用,以下两种办法: 1;display更改元素的显示水平 •••vertical-align和line-height *注意了,对于内联元素,vertical-align与line-height虽然看不见,单实际上[到处都是]* 详情见神奇demo vertical-aligntest.html(包含各种示例,及应用) 这里的知识点,一定要参考demo!
+                <br>
+                <br> ••••vertical-align线性属性值(top/middle/bottom)深入理解-------深入理解底线,顶线,中线的表现 定义: middle:元素垂直中心点和父元素基线上1/2 x-height对齐. vertical-align:bottom:inline/inline-block元素:元素底部和整行的底部对齐 vertical-align:top:inline/inline-block元素:元素顶部和整行的顶部对齐
+                <br>
+                <br> •••深入理解vertical-align文本类属性值----说说text-bottom/text-top 定义:vertical-align:text-top:盒子的顶部和父级content area的顶部对齐. vertical-align:text-bottom:盒子的底部和父级content area的底部对齐.
+                <br>
+                <br> •••深入理解vertical-align上标下标类----vertical-align:sub/super (提一下html中的上标和下标,上标&lt;sup&gt;下标&lt;sub&gt;;上标和下标的文字是正常文字大小的3/4左右) 定义:super(上标):提高盒子的基线到父级合适的上标基线位置 sub(下标):降低盒子的基线到父级合适的下标基线位置. 本节老师没有分享实际开发经验,因为张老师写了10年的css,基本上没有用过这类属性,明显不常用,直接下一节.
+                <br>
+                <br> •••vertical-align的实际应用--经验分享 1,小图标和文字对齐,做法:给图标设置vertical-align负值. 2,不定尺寸图片或多行文字的垂直居中;做法:分三步1;需要垂直居中的元素inline-block化;2,添加一个0宽度100%高度的辅助元素;3,主体元素和辅助元素都设置vertical-align:middle.</p>
+       
